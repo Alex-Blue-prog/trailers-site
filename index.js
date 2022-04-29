@@ -9,7 +9,7 @@ dotenv.config();
 app.use((req, res, next) => {
     // res.header("Access-Control-Allow-Origin", "https://ephemeral-twilight-e390d2.netlify.app/");
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
     res.header("Access-Control-Allow-Headers", "token, Token, Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
     app.use(cors());
     next();

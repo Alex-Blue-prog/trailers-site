@@ -36,7 +36,6 @@ const AnimeSchema = new mongoose.Schema(
         episodes: [
             {
                 ep: {type: Number, default: 1},
-                img:{type: String},
                 video:{type: String},
                 key:{type: String, default: null}
             }

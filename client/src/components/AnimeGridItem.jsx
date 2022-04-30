@@ -33,7 +33,8 @@ const Img = styled.img`
 `;
 
 const TotalCircle = styled.div`
-    line-height: 25px;
+    /* line-height: 25px; */
+    height: 25px;
     width: 25px;
     border-radius: 50%;
     position: absolute;
@@ -43,6 +44,35 @@ const TotalCircle = styled.div`
     color: teal;
     text-align: center;
     font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (min-width: 700px) {
+        /* line-height: 22px; */
+        height: 22px;
+        width: 22px;
+    }
+`;
+
+const DubCircle = styled.div`
+    line-height: 25px;
+    /* width: 25px; */
+    width: fit-content;
+    padding: 0 10px;
+    border-radius: 25px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: teal;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+
+    @media (min-width: 700px) {
+        line-height: 22px;
+        padding: 0 8px;
+    }
 `;
 
 const AnimeName = styled.h2`
@@ -69,8 +99,11 @@ const AnimeGridItem = ({value}) => {
                     <AnimeImgContainer>
                         <Img src={value?.img} />
                         <TotalCircle>
-                            {value?.episodes.length}
+                            <p>{value?.episodes.length}</p>
                         </TotalCircle>
+                        <DubCircle>
+                            {value?.dub ? "dub" : "leg"}
+                        </DubCircle>
                     </AnimeImgContainer>
                     <AnimeName>{value?.name}</AnimeName>
                 </AnimeListItem>

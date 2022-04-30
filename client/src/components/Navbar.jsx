@@ -94,7 +94,7 @@ const Navbar = () => {
                             <AnimeInfo>
                                 <AnimeInfoText><big>{value.name}</big></AnimeInfoText>
                                 <AnimeInfoText><b> Video: </b>{value.dub ? "Dublado" : "Lengendado"}</AnimeInfoText>
-                                <AnimeInfoText><b>Temporada: </b>{!value.temp ? value.temp : "nenhuma"}</AnimeInfoText>
+                                <AnimeInfoText><b>Temporada: </b>{value.temp ? value.temp : "nenhuma"}</AnimeInfoText>
                             </AnimeInfo>
                         </Anime>
                     </Link>

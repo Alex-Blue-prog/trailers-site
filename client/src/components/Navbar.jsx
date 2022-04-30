@@ -93,8 +93,10 @@ const Navbar = () => {
                             </AnimeImg>
                             <AnimeInfo>
                                 <AnimeInfoText><big>{value.name}</big></AnimeInfoText>
+                     
                                 <AnimeInfoText><b> Video: </b>{value.dub ? "Dublado" : "Lengendado"}</AnimeInfoText>
                                 <AnimeInfoText><b>Temporada: </b>{value.temp ? value.temp : "nenhuma"}</AnimeInfoText>
+                          
                             </AnimeInfo>
                         </Anime>
                     </Link>
@@ -261,18 +263,21 @@ const AnimeInfo = styled.div`
     /* padding: 0 50px; */
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    /* justify-content: space-evenly; */
     padding: 0 25px;
     color: #fff;
 `;
 
 const AnimeInfoText = styled.p`
-
-
     &:first-child {
         color: teal;
         font-weight: bold;
+        margin-top: 30px;
+        margin-bottom: 60px;
+        text-align: center;
     }
+
+    margin-bottom: 10px;
 `;
 
 const AnimeImg = styled.div`

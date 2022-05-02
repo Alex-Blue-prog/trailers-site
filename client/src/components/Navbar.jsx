@@ -200,7 +200,7 @@ const NavIcon = styled.div`
 
 // search style
 const SearchList = styled.div`
-    height: calc(100vh - 53px);
+    height: calc(100vh);
     padding-bottom: 53px;
     overflow-y: auto;
     width: 100%;

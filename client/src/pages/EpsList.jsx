@@ -45,7 +45,7 @@ const AnimeImgContianer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  margin-bottom: 25px;
 `;
 
 const AnimeImg = styled.div`
@@ -174,12 +174,19 @@ const TempNum = styled.h4`
   margin-bottom: 10px;
   text-transform: uppercase;
   letter-spacing: 2px;
-  
+  @media (min-width: 700px) {
+    /* border-left: 5px solid teal;
+    padding-left: 10px; */
+    text-align: center;
+  }
 `;
 
 const TempType = styled.h4`
   color: #fff;
-  
+  @media (min-width: 700px) {
+    border-left: 5px solid teal;
+    padding-left: 10px;
+  }
 `;
 
 const EpList = styled.ul`
@@ -208,6 +215,7 @@ const EpText = styled.span`
 
 const EpTitle = styled.span`
   color: gray;
+  
 
   @media (min-width: 700px) {
     font-size: 0.8rem;
@@ -278,7 +286,7 @@ const EpsList = ({checkFetching, isFetching}) => {
           <ImgBottomTitle>Assistir {animeInfo.name} Online</ImgBottomTitle>
         </AnimeImgContianer>
         <AnimeInfo>
-          <InfoText>Áudio: <InfoTextValue>{animeInfo.dub ? "dublado" : "lengendao"}</InfoTextValue></InfoText>
+          <InfoText>Video: <InfoTextValue>{animeInfo.dub ? "dublado" : "lengendado"}</InfoTextValue></InfoText>
           <InfoText>Lançamento: <InfoTextValue>{animeInfo.launch}</InfoTextValue></InfoText>
           <InfoText>Total de trailers: <InfoTextValue>{animeInfo.episodes?.length}</InfoTextValue></InfoText>
           {/* <InfoText>Atualizado: <InfoTextValue>{new Date(animeInfo.updatedAt).toLocaleDateString()}</InfoTextValue></InfoText> */}

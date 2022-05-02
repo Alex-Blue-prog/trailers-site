@@ -3,8 +3,10 @@ import styled from "styled-components";
 import { axiosInstance } from "../config";
 import AnimeGridItem from "./AnimeGridItem";
 
-const AnimeGrid = ({sectionName, queryName, checkFetching}) => {
+const AnimeGrid = ({sectionName, queryName, checkFetching, skip}) => {
     const [animes, setAnimes] = useState([]);
+
+    // console.log(skip);
 
     useEffect(()=> {
         let isMounted = true;
@@ -15,7 +17,7 @@ const AnimeGrid = ({sectionName, queryName, checkFetching}) => {
             checkFetching(true);
             
 
-            const res = await axiosInstance.get(`anime/all?${queryName}=true`);
+            const res = await axiosInstance.get(`anime/all?${queryName}=true&skip=${skip}`);
 
             if(isMounted) {
                 setAnimes(res.data);
@@ -30,7 +32,7 @@ const AnimeGrid = ({sectionName, queryName, checkFetching}) => {
             isMounted = false; 
             abortController.abort();  
         };
-    },[])
+    },[skip, queryName])
 
   return (
     <Container>

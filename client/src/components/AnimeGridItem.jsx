@@ -82,8 +82,10 @@ const AnimeName = styled.h2`
     text-align: center;
     font-weight: 600;
     text-decoration: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
     /* margin-top: 10px; */
-    line-height: calc(1.2rem + 15px);
+    /* line-height: calc(1.2rem + 15px); */
 
     @media (min-width: 700px) {
         font-size: 1.1rem;

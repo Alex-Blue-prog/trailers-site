@@ -78,7 +78,7 @@ const Navbar = () => {
                 animes.length == [] && text.length > 1 &&
 
                 <NoAnimeContainer>
-                    <NoAnimeMsg>nenhum anime foi encontrado</NoAnimeMsg>
+                    <NoAnimeMsg>nenhum item foi encontrado</NoAnimeMsg>
                 </NoAnimeContainer>
     
             }
@@ -94,8 +94,9 @@ const Navbar = () => {
                             <AnimeInfo>
                                 <AnimeInfoText><big>{value.name}</big></AnimeInfoText>
                      
-                                <AnimeInfoText><b> Video: </b>{value.dub ? "Dublado" : "Lengendado"}</AnimeInfoText>
-                                <AnimeInfoText><b>Temporada: </b>{value.temp ? value.temp : "nenhuma"}</AnimeInfoText>
+                                <AnimeInfoText><b>Video: </b>{value.dub ? "Dublado" : "Lengendado"}</AnimeInfoText>
+                                <AnimeInfoText><b>Lançamento: </b>{value.launch}</AnimeInfoText>
+                                <AnimeInfoText><b>Total: </b>{value.episodes.length}</AnimeInfoText>
                           
                             </AnimeInfo>
                         </Anime>
@@ -273,7 +274,7 @@ const AnimeInfoText = styled.p`
         color: teal;
         font-weight: bold;
         margin-top: 30px;
-        margin-bottom: 60px;
+        margin-bottom: 55px;
         text-align: center;
     }
 

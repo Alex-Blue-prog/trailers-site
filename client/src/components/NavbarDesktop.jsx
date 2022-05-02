@@ -95,7 +95,7 @@ const NavbarDesktop = () => {
                 animes.length == [] && text.length > 1 &&
 
                 <NoAnimeContainer>
-                    <NoAnimeMsg>nenhum anime foi encontrado</NoAnimeMsg>
+                    <NoAnimeMsg>nenhum item foi encontrado</NoAnimeMsg>
                 </NoAnimeContainer>
     
             }
@@ -114,7 +114,8 @@ const NavbarDesktop = () => {
                                     <AnimeInfo>
                                         <AnimeInfoText><big>{value.name}</big></AnimeInfoText>
                                         <AnimeInfoText><b> Video: </b>{value.dub ? "Dublado" : "Lengendado"}</AnimeInfoText>
-                                        <AnimeInfoText><b>Temporada: </b>{value.temp ? value.temp : "nenhuma"}</AnimeInfoText>
+                                        <AnimeInfoText><b>Lançamento: </b>{value.launch}</AnimeInfoText>
+                                        <AnimeInfoText><b>Total: </b>{value.episodes.length}</AnimeInfoText>
                                     </AnimeInfo>
                                 </Anime>
                             </Link>
@@ -228,7 +229,7 @@ const SearchList = styled.div`
     left: 0;
     opacity: ${props => props.search ? "1" : "0"};
     transition: opacity 0.1s linear;
-    padding: 0 10px;
+    /* padding: 0 10px; */
 `;
 
 const SearchBar = styled.div`
@@ -272,14 +273,17 @@ const SearchBtn = styled.div`
 
 const AnimesWrapper = styled.div`
     margin-top: 10px;
-    width: calc(100vw - 40px) ;
+    width: calc(100vw - 20px) ;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 `;
 
 const AnimeItem = styled.div`
-    width: calc(50% - 10px);
+    width: calc(33.33% - 20px);
+    padding: 0 10px;
+    height: 183px;
+    margin-bottom: 10px;
 `;
 
 const Anime = styled.div`
@@ -315,13 +319,17 @@ const AnimeInfoText = styled.p`
 
 const AnimeImg = styled.div`
     width: 50%;
-    height: 150px;
+    height: 183px;
 `;
 
-const Img = styled.img`
+const Img = styled.div`
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    /* object-fit: cover; */
+    background-image: url(${props => props.src});
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
 `;

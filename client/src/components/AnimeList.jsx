@@ -26,7 +26,7 @@ const AnimeList = ({value, position}) => {
 }
 
 const Wrapper = styled.div`
-    width: calc((100vw - 20px) /  3);
+    width: calc(100% / 3);
 `;
 const ImgWrapper = styled.div`
     width: 100%;

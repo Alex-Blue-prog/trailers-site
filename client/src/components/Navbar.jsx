@@ -191,7 +191,8 @@ const NavIcon = styled.div`
 
 // search style
 const SearchList = styled.div`
-    min-height: calc(100vh - 53px);
+    height: calc(100vh - 53px);
+    overflow-y: auto;
     width: 100%;
     background-color: #111;
     margin: 0;
@@ -283,7 +284,7 @@ const AnimeInfoText = styled.p`
 
 const AnimeImg = styled.div`
     width: 50%;
-    height: 200px;
+    height: 225px;
 `;
 
 const Img = styled.img`

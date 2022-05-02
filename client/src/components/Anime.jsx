@@ -170,10 +170,11 @@ const Anime = ({checkFetching}) => {
             dif={diference}
             animate={animate}
             >
-            
+
                 {newAnimes.map(item => (
                     <AnimeList key={item._id} value={item} position={sliderPosition}/>
                 ))}
+                
             </Wrapper>
         </Container>
     </MegaContainer>
@@ -181,7 +182,7 @@ const Anime = ({checkFetching}) => {
 }
 
 const MegaContainer = styled.div`
-    padding: 0 10px;
+    /* padding: 0 10px; */
     margin-top: 83px;
     margin-bottom: 23px;
     @media (min-width: 700px) {
@@ -193,6 +194,7 @@ const HeadWrapper = styled.div`
     padding: 0 10px;
     border-left: 5px solid teal;
     margin-bottom: 5px;
+    margin-left: 10px;
 `;
 
 const HeadTitle = styled.h1`
@@ -204,6 +206,7 @@ const HeadTitle = styled.h1`
 const Container = styled.div`
     overflow: hidden;
     position: relative;
+    margin: 0 10px;
 `;
 
 const Icon = styled.div`
@@ -215,20 +218,21 @@ const Icon = styled.div`
     padding: 40px 3px;
     width: 30px;
     cursor: pointer;
-    /* background: red; */
     pointer-events: ${navigator.userAgentData.mobile ? 'none' : 'auto'};
 `;
 
 
 const Wrapper = styled.div.attrs(props => ({
     style: {
-        transform:`translateX(calc((100vw - 20px) /  3 * -${props.slider} + ${props.dif}px))`,
+        transform:`translateX(calc(100% /  8 * -${props.slider} + ${props.dif}px))`,
     },
 }))`
     display: flex;
     flex-wrap: nowrap;
-    /* width: calc((100vw - 20px) / 3 * 22); */
-    width: fit-content;
+    width: calc(100% / 3 * 8); 
+    /* width: 100vw;
+    max-width: 100%; */
+    /* width: fit-content; */
     transition: ${props => props.animate ? `transform 0.1s linear` : `none`};
 `;
 

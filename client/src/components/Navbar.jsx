@@ -200,21 +200,21 @@ const NavIcon = styled.div`
 
 // search style
 const SearchList = styled.div`
-    height: calc(100vh);
-    padding-bottom: 53px;
+    height: calc(100vh - 53px);
     overflow-y: auto;
     width: 100%;
     background-color: #111;
     margin: 0;
-    padding: 0;
     transform: ${props => props.search ? `translateY(0)` : `translateY(-100%)`} ;
     z-index: -5;
     position: fixed;
-    top: 53px;
+    /* top: 53px; */
+    top: 0;
     left: 0;
     opacity: ${props => props.search ? "1" : "0"};
     transition: opacity 0.1s linear;
     padding: 0 10px;
+    padding-top: 53px;
 `;
 
 const SearchBar = styled.div`

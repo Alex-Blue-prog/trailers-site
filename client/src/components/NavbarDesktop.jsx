@@ -20,6 +20,15 @@ const NavbarDesktop = () => {
 
     },[location]);
 
+    //check if the search section is open and disable body scroll
+    useEffect(()=> {
+        if(searchOpen){
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "visible";
+        }
+    },[searchOpen]);
+
     const searchAnime = async (e) => {   
         
         if(e.target.value.length > 1) {
@@ -217,7 +226,8 @@ const NavIcon = styled.div`
 
 // search style
 const SearchList = styled.div`
-    min-height: calc(100vh - 53px);
+    height: calc(100vh - 53px);
+    overflow-y: auto;
     width: 100vw;
     background-color: #111;
     margin: 0;

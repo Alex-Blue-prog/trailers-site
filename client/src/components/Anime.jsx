@@ -206,7 +206,7 @@ const HeadTitle = styled.h1`
 const Container = styled.div`
     overflow: hidden;
     position: relative;
-    margin: 0 10px;
+    margin: 0 5px;
 `;
 
 const Icon = styled.div`

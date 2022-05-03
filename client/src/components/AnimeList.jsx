@@ -27,6 +27,8 @@ const AnimeList = ({value, position}) => {
 
 const Wrapper = styled.div`
     width: calc(100% / 3);
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
 `;
 const ImgWrapper = styled.div`
     width: 100%;
@@ -38,6 +40,7 @@ const Img = styled.img`
     object-fit: cover;
 `;
 const AnimeName = styled.h2`
+    margin-top: 5px;
     font-size: 1.1rem;
     text-transform: capitalize;
     color: teal;

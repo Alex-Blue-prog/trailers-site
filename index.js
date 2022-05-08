@@ -14,11 +14,13 @@ app.use((req, res, next) => {
     app.use(cors());
     next();
 });
+// app.use(cors());
 
 //routes
 const animeRoute = require("./routes/anime");
 const authRoute = require("./routes/auth");
 const animeInfoRoute = require("./routes/animeInfo");
+const userRoute = require("./routes/user");
 
 
 const mongoose = require("mongoose");
@@ -33,6 +35,7 @@ app.use(express.json());
 app.use("/api/anime", animeRoute);
 app.use("/api/info", animeInfoRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/user", userRoute);
 
 //heroku set up
 if(!process.env.LOCALHOST) {

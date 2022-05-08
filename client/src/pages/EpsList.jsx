@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Loading from "../components/Loading";
 import { axiosInstance } from "../config";
 import Footer from "../components/Footer";
+import { Favorite, FavoriteBorder } from "@material-ui/icons";
 
 const Container = styled.div`
   margin-top: 80px;
@@ -60,6 +61,14 @@ const AnimeImg = styled.div`
 
 `;
 
+const FavoriteIcon = styled.div`
+  padding: 5px;
+  color: teal;
+  position: absolute;
+  left: 0;
+  top: 0;
+`;
+
 const Img = styled.img`
   position: absolute;
   left: 0;
@@ -77,6 +86,7 @@ const ImgBottomTitle = styled.h2`
   color: teal;
   font-size: 1rem;
   margin-top: 15px;
+  text-transform: capitalize;
   @media (min-width: 700px) {
     font-size: 0.9rem;
   }
@@ -222,10 +232,10 @@ const EpTitle = styled.span`
   }
 `;
 
-const EpsList = ({checkFetching, isFetching}) => {
+const EpsList = ({changeFavorite, user, checkFetching, isFetching}) => {
   const locationId = useLocation().pathname.split("/")[2];
   const [animeInfo, setAnimeInfo] = useState({});
-
+  
 
   useEffect(()=> {
     let isMounted = true;
@@ -260,9 +270,17 @@ const EpsList = ({checkFetching, isFetching}) => {
     }
 
     increaseRate();
-
+ 
   
   },[locationId]);
+
+  //check if this item is favorited or not
+
+
+  //change favorite when user click the favorite icon button
+  const changeFavoriteFunc = () => {
+    changeFavorite(user?.favorites.includes(animeInfo._id), animeInfo._id);
+  }
 
   useEffect(()=> {
     window.scrollTo(0, 0);
@@ -282,6 +300,7 @@ const EpsList = ({checkFetching, isFetching}) => {
         <AnimeImgContianer>
           <AnimeImg>
             <Img src={animeInfo.img} />
+            {user && <FavoriteIcon onClick={changeFavoriteFunc}>{user?.favorites.includes(animeInfo._id) ? <Favorite style={{fontSize: "2rem"}} /> : <FavoriteBorder style={{fontSize: "2rem"}} />}</FavoriteIcon>}
           </AnimeImg>
           <ImgBottomTitle>Assistir {animeInfo.name} Online</ImgBottomTitle>
         </AnimeImgContianer>
@@ -294,13 +313,6 @@ const EpsList = ({checkFetching, isFetching}) => {
         <DescWrapper>
           <Desc>Descrição</Desc>
           <DescText>{animeInfo.desc}</DescText>
-          {
-          /* call a temp api
-          <TemporadaContainer>
-            <TempBtn>Temporada 1</TempBtn>        
-          </TemporadaContainer> 
-          */
-          }
         </DescWrapper>
         
       </AnimeContainer>

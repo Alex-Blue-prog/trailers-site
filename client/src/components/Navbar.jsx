@@ -1,15 +1,16 @@
 import styled from "styled-components";
-import {Menu, Search, Close, Home, FiberNew, Star, MovieCreation} from '@material-ui/icons'
+import {Menu, Search, Close, Home, FiberNew, Star, MovieCreation, Favorite} from '@material-ui/icons'
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { axiosInstance } from "../config";
 
-const Navbar = () => {
+const Navbar = ({user, logout}) => {
     const [navOpen, setNavOpen] = useState(false);
     const [searchOpen, setSearchOpen] = useState(false);
     const [animes, setAnimes] = useState([]);
     const [text, setText] = useState("");
     const location = useLocation().pathname; 
+    
 
     useEffect(()=> {
 
@@ -72,9 +73,27 @@ const Navbar = () => {
             <Link to="/popularanimes" style={{color: "inherit", textDecoration:"none"}} onClick={()=> setNavOpen(false)}>
             <NavListItem><NavIcon><Star style={{fontSize: "1.5rem"}}/></NavIcon>Populares</NavListItem>
             </Link>
-            {/* <Link to="/" style={{color: "inherit", textDecoration:"none"}} onClick={()=> setNavOpen(false)}>
-            <NavListItem><NavIcon><MovieCreation style={{fontSize: "1.5rem"}}/></NavIcon>Todos</NavListItem>
-            </Link> */}
+            {user &&
+            <Link to="/favorites" style={{color: "inherit", textDecoration:"none"}} onClick={()=> setNavOpen(false)}>
+            <NavListItem><NavIcon><Favorite style={{fontSize: "1.5rem"}}/></NavIcon>Favoritos</NavListItem>
+            </Link>
+            }
+
+            {!user ?
+                <AuthContainer>
+                    <Link to="/login" style={{color: "inherit", textDecoration:"none"}} onClick={()=> setNavOpen(false)}>
+                    <LoginBtn> <p> login  </p></LoginBtn>
+                    </Link>
+                    <Link to="/register" style={{color: "inherit", textDecoration:"none"}} onClick={()=> setNavOpen(false)}>
+                    <RegisterBtn><p> registrar </p></RegisterBtn>
+                    </Link>
+                </AuthContainer>
+            :
+                <AuthContainer>
+                    <LoginBtn onClick={logout} style={{background: "red"}}> <p style={{letterSpacing: "2px"}}> Sair </p></LoginBtn>
+                </AuthContainer>
+            }
+            
         </NavList>
         <SearchList search={searchOpen}>
             <SearchBar>
@@ -168,7 +187,7 @@ const Logo = styled.h1`
 `;
 
 const NavList = styled.ul`
-    height: calc(100vh - 53px);
+    height: calc(100% - 53px);
     width: 100%;
     background-color: #111;
     margin: 0;
@@ -197,6 +216,41 @@ const NavIcon = styled.div`
     margin: 0 15px;
     
 `;
+
+const AuthContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 0 15px;
+    width: calc(100% - 30px);
+    position: absolute;
+    left: 0;
+    bottom: 15px;
+`;
+const RegisterBtn = styled.div`
+    color: teal;
+    background-color: #fff;
+    cursor: pointer;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 1.5rem;
+    text-transform: capitalize;
+    border-radius: 5px;
+    font-weight: 600;
+    margin-top: 15px;
+`;
+
+const LoginBtn = styled.div`
+    color: #fff;
+    background-color: teal;
+    cursor: pointer;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 1.5rem;
+    text-transform: capitalize;
+    border-radius: 5px;
+    font-weight: 600;
+`;
+
 
 // search style
 const SearchList = styled.div`

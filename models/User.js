@@ -23,6 +23,9 @@ const UserSchema = new mongoose.Schema(
         },
         img: {
             type: String
+        },
+        favorites: {
+            type: Array
         }
 
     },{timestamps:true})

@@ -4,8 +4,7 @@ const AnimeSchema = new mongoose.Schema(
     {
         name:{
             type: String,
-            required: true,
-            // unique: true
+            required: true
         },
         desc: {
             type: String

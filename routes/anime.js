@@ -145,7 +145,6 @@ router.put("/:id", verifyTokenAndAdmin, multer(multerConfig).single('file'), asy
         //push new episode to array
         
         if(req.body.documents) {
-            verifyTokenAndAdminTopLevel();
             
             anime = JSON.parse(req.body.documents);
             let updateAnime = await Anime.findOneAndUpdate(
@@ -157,7 +156,8 @@ router.put("/:id", verifyTokenAndAdmin, multer(multerConfig).single('file'), asy
             console.log('novo episodio adicionado');
             res.status(200).json(updateAnime);
         } else {
-
+            
+            verifyTokenAndAdminTopLevel();
             //update anime main info
             const updateAnime = await Anime.updateOne(
                 {_id: req.params.id}, 

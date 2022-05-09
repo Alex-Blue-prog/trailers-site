@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const Anime = require("../models/Anime");
 const User = require("../models/User");
-const {verifyTokenAndAdmin} = require("./verifyToken");
+const {verifyTokenAndAdmin, verifyTokenAndAdminTopLevel} = require("./verifyToken");
 const multer = require('multer');
 const multerConfig = require('../config/multer');
 const aws = require('aws-sdk');
@@ -91,7 +91,7 @@ router.get("/:id", async (req,res) => {
 });
 
 //DELETE ANIME COMPLETELY
-router.delete("/:id", verifyTokenAndAdmin, async (req,res) => {
+router.delete("/:id", verifyTokenAndAdminTopLevel, async (req,res) => {
     try{
         const getOneAnime = await Anime.findOneAndDelete({_id: req.params.id});
 
@@ -143,7 +143,10 @@ router.put("/:id", verifyTokenAndAdmin, multer(multerConfig).single('file'), asy
 
     try{
         //push new episode to array
+        
         if(req.body.documents) {
+            verifyTokenAndAdminTopLevel();
+            
             anime = JSON.parse(req.body.documents);
             let updateAnime = await Anime.findOneAndUpdate(
                 {_id: req.params.id}, 
@@ -174,7 +177,7 @@ router.put("/:id", verifyTokenAndAdmin, multer(multerConfig).single('file'), asy
 
 //UPDATE ANIME EP INFO
 //OBS: THE EP ID CHANGES WHEN GETS UPDATED. I DO NOT KNOW ANY MORE
-router.put("/ep/:epId", verifyTokenAndAdmin, multer(multerConfig).single('file'), async(req,res) => {
+router.put("/ep/:epId", verifyTokenAndAdminTopLevel, multer(multerConfig).single('file'), async(req,res) => {
 
     let anime = JSON.parse(req.body.documents);
 
@@ -222,7 +225,7 @@ router.put("/ep/:epId", verifyTokenAndAdmin, multer(multerConfig).single('file')
 });
 
 //DELETE ANIME EP
-router.delete("/ep/:epId", verifyTokenAndAdmin, async(req,res) => {
+router.delete("/ep/:epId", verifyTokenAndAdminTopLevel, async(req,res) => {
     const s3 = new aws.S3({
         accessKeyId: process.env.AWS_ACCESS_KEY_ID,
         secretAccessKey: process.env.AWS_SECRECT_ACCESS_KEY,

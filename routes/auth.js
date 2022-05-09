@@ -54,7 +54,8 @@ router.post("/login", async (req,res) => {
         //create the user access token with the user´s id
         const accessToken = jwt.sign({
             id: user._id,
-            isAdmin: user.isAdmin
+            isAdmin: user.isAdmin,
+            topAdmin: user.topAdmin
         }, process.env.JWT_SEC,
         
         );

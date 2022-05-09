@@ -23,12 +23,12 @@ const Navbar = ({user, logout}) => {
 
     //check if the search section is open and disable body scroll
     useEffect(()=> {
-        if(searchOpen){
+        if(searchOpen, navOpen){
             document.body.style.overflow = "hidden";
         } else {
             document.body.style.overflow = "visible";
         }
-    },[searchOpen]);
+    },[searchOpen, navOpen]);
 
     const searchAnime = async (e) => {        
 
@@ -78,10 +78,10 @@ const Navbar = ({user, logout}) => {
             <Link to="/favorites" style={{color: "inherit", textDecoration:"none"}} onClick={()=> setNavOpen(false)}>
             <NavListItem><NavIcon><Favorite style={{fontSize: "1.5rem"}}/></NavIcon>Favoritos</NavListItem>
             </Link>
-            <UserInfo>
+            {/* <UserInfo>
                 <UserName>usuário: <small style={{textDecoration: "underline", marginLeft: "5px"}}> {user.username} </small></UserName>
                 <UserName>email: <small style={{textDecoration: "underline", marginLeft: "5px"}}> {user.email} </small></UserName>
-            </UserInfo>
+            </UserInfo> */}
             </>
             }
 
@@ -96,10 +96,10 @@ const Navbar = ({user, logout}) => {
                 </AuthContainer>
             :
                 <AuthContainer>
-                    {/* <UserInfo>
-                        <UserName>usuario: <small style={{color: "gray"}}> {user.username} </small></UserName>
-                        <UserName>email: <small style={{color: "gray"}}> {user.email} </small></UserName>
-                    </UserInfo> */}
+                    <UserInfo>
+                        <UserName>usuário: <small style={{textDecoration: "underline", marginLeft: "5px"}}> {user.username} </small></UserName>
+                        <UserName>email: <small style={{textDecoration: "underline", marginLeft: "5px"}}> {user.email} </small></UserName>
+                    </UserInfo>
                     <LoginBtn onClick={logout}> <p style={{letterSpacing: "2px"}}> Sair </p></LoginBtn>
                 </AuthContainer>
             }
@@ -199,9 +199,8 @@ const Logo = styled.h1`
 const NavList = styled.ul`
     height: calc(100% - 53px);
     width: 100%;
-    /* background-color: #000; */
-    background: linear-gradient(to bottom, teal, #111);
-    /* background: linear-gradient(to top, #fff, #000); */
+    background-color: #000;
+    /* background: linear-gradient(to bottom, teal, #111); */
     margin: 0;
     padding: 0;
     transform:  ${props => props.nav ? `translateY(0)` : `translateY(-105%)`} ;
@@ -265,7 +264,7 @@ const LoginBtn = styled.div`
 
 const UserInfo = styled.div`
     
-    padding: 15px 15px;
+    padding: 15px 0px;
 `;
 
 const UserName = styled.p`

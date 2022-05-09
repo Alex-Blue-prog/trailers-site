@@ -87,7 +87,7 @@ const Register = () => {
 }
 
 const Container = styled.div`
-  margin-top: 53px;
+  margin-top: 73px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -104,6 +104,7 @@ const Form = styled.form`
   align-items: center;
   background-color: #333;
   border-radius: 5px;
+  position: absolute; //
   
   @media (min-width: 700px) {
     max-width: 500px;

@@ -66,6 +66,9 @@ const NavbarDesktop = ({user, logout}) => {
     }
 
   return (
+    <>
+    <BlackScreen navOpen={navOpen} onClick={() => setNavOpen(false)}></BlackScreen>
+
     <Nav>
         <Bar>
             <Icon onClick={()=>{ setNavOpen(!navOpen); setSearchOpen(false)}}>
@@ -159,8 +162,26 @@ const NavbarDesktop = ({user, logout}) => {
         </SearchList>
        
     </Nav>
+    </>
   )
 }
+
+const BlackScreen = styled.div`
+    display: none;
+    background-color: #00000080;
+    position: fixed;
+    top: 53px;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 50;
+    transition: opacity 0.1s linear;
+    opacity: ${props => props.navOpen ? 1 : 0};
+
+    @media (min-width: 700px) {
+        display: ${props => props.navOpen ? "block" : "none"};
+    }
+`;
 
 const NoAnimeContainer = styled.div`
     width: calc(100% - 40px);
@@ -219,13 +240,11 @@ const Logo = styled.h1`
 const NavList = styled.ul`
     height: calc(100vh - 53px);
     width: 300px;
-    /* background-color: #000; */
-    /* background: linear-gradient(to top, #fff, #000); */
     background: linear-gradient(to bottom, teal, #111);
     margin: 0;
     padding: 0;
     transform:  ${props => props.nav ? `translateX(0)` : `translateX(-100%)`} ;
-    z-index: -5;
+    z-index: 100;
     position: fixed;
     top: 53px;
     left: 0%;

@@ -23,10 +23,11 @@ const TopTitle = styled.h1`
   margin-bottom: 18px;
   padding-left: 20px;
   padding-right: 20px;
+  font-weight: 400;
   @media (min-width: 700px) {
     font-size: 0.9rem;
     width: 100%;
-    font-weight: 400;
+    
   }
 `;
 

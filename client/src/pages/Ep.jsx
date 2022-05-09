@@ -87,6 +87,8 @@ const EpName = styled.h1`
   margin-top: 10px;
   font-size: 1.5rem;
   text-transform: capitalize;
+  text-align: center;
+  font-weight: 600;
 
   @media (min-width: 700px) {
     font-size: 1.2rem;

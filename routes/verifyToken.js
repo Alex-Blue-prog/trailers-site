@@ -32,7 +32,7 @@ const verifyTokenAndAdminTopLevel = (req,res,next) => {
         if(req.user.isAdmin && req.user.topAdmin){
             next();
         } else{
-            return res.status(200).json("you are not the top admin");
+            return res.status(430).json("you are not the top admin");
         }
     })
 }

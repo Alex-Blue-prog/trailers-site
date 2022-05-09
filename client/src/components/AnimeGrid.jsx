@@ -1,9 +1,11 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { axiosInstance } from "../config";
 import AnimeGridItem from "./AnimeGridItem";
+import {Favorite, Pageview} from "@material-ui/icons";
 
-const AnimeGrid = ({sectionName, queryName, checkFetching, skip}) => {
+const AnimeGrid = ({user, sectionName, queryName, checkFetching, skip}) => {
     const [animes, setAnimes] = useState([]);
 
     // console.log(skip);
@@ -13,11 +15,19 @@ const AnimeGrid = ({sectionName, queryName, checkFetching, skip}) => {
         let abortController = new AbortController();  
 
         const getAnimes = async () => {
+            let res;
  
             checkFetching(true);
             
+            if(queryName == "user") {
+                // console.log('1');
+                res = await axios.get(`${process.env.REACT_APP_SERVER_URL}user/favorites`, { headers: {token: "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken} });
+            } else {
+                // console.log('2');
+                res = await axiosInstance.get(`anime/all?${queryName}=true&skip=${skip}`);
+            }
 
-            const res = await axiosInstance.get(`anime/all?${queryName}=true&skip=${skip}`);
+            
 
             if(isMounted) {
                 setAnimes(res.data);
@@ -34,7 +44,7 @@ const AnimeGrid = ({sectionName, queryName, checkFetching, skip}) => {
         };
     },[skip, queryName])
 
-  return (
+  return animes.length > 0 ? (
     <Container>
         <SectionName>
             {sectionName}
@@ -46,6 +56,13 @@ const AnimeGrid = ({sectionName, queryName, checkFetching, skip}) => {
         </AnimeList>
         
     </Container>
+  ) : (
+      <EmptyWrapper>
+        <div>
+            <EmptyTitle>Ainda não há nada aqui.</EmptyTitle>
+            {/* <Favorite style={{fontSize: "3.5rem"}} /> */}
+        </div>
+      </EmptyWrapper>
   )
 }
 
@@ -73,6 +90,18 @@ const AnimeList = styled.ul`
         justify-content: flex-start;
     }
 `;
+
+const EmptyWrapper = styled.div`
+    margin-top: 280px;
+    color: #fff;
+    text-align: center;
+`;
+
+const EmptyTitle = styled.p`
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+`;
+
 
 
 export default AnimeGrid

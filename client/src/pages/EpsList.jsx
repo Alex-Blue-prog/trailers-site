@@ -22,9 +22,11 @@ const TopTitle = styled.h1`
   font-size: 1.1rem;
   margin-bottom: 18px;
   padding-left: 20px;
+  padding-right: 20px;
   @media (min-width: 700px) {
     font-size: 0.9rem;
     width: 100%;
+    font-weight: 400;
   }
 `;
 
@@ -47,6 +49,7 @@ const AnimeImgContianer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 25px;
+  
 `;
 
 const AnimeImg = styled.div`
@@ -55,7 +58,6 @@ const AnimeImg = styled.div`
   border: 1px solid teal;
   position: relative;
   @media (min-width: 700px) {
-    
     height: 450px;
   }
 
@@ -67,6 +69,7 @@ const FavoriteIcon = styled.div`
   position: absolute;
   left: 0;
   top: 0;
+  cursor: pointer;
 `;
 
 const Img = styled.img`
@@ -184,10 +187,13 @@ const TempNum = styled.h4`
   margin-bottom: 10px;
   text-transform: uppercase;
   letter-spacing: 2px;
+  font-weight: 400;
   @media (min-width: 700px) {
     /* border-left: 5px solid teal;
     padding-left: 10px; */
     text-align: center;
+    margin-bottom: 30px;
+    font-weight: 300;
   }
 `;
 
@@ -196,6 +202,7 @@ const TempType = styled.h4`
   @media (min-width: 700px) {
     border-left: 5px solid teal;
     padding-left: 10px;
+    font-weight: 400;
   }
 `;
 

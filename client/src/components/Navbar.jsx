@@ -64,6 +64,7 @@ const Navbar = ({user, logout}) => {
            
         </Bar>
         <NavList nav={navOpen}>
+            
             <Link to="/" style={{color: "inherit", textDecoration:"none"}} onClick={()=> setNavOpen(false)}>
             <NavListItem><NavIcon><Home style={{fontSize: "1.5rem"}}/></NavIcon> Inicio</NavListItem>
             </Link>
@@ -73,10 +74,15 @@ const Navbar = ({user, logout}) => {
             <Link to="/popularanimes" style={{color: "inherit", textDecoration:"none"}} onClick={()=> setNavOpen(false)}>
             <NavListItem><NavIcon><Star style={{fontSize: "1.5rem"}}/></NavIcon>Populares</NavListItem>
             </Link>
-            {user &&
+            {user && <>
             <Link to="/favorites" style={{color: "inherit", textDecoration:"none"}} onClick={()=> setNavOpen(false)}>
             <NavListItem><NavIcon><Favorite style={{fontSize: "1.5rem"}}/></NavIcon>Favoritos</NavListItem>
             </Link>
+            <UserInfo>
+                <UserName>usuário: <small style={{textDecoration: "underline", marginLeft: "5px"}}> {user.username} </small></UserName>
+                <UserName>email: <small style={{textDecoration: "underline", marginLeft: "5px"}}> {user.email} </small></UserName>
+            </UserInfo>
+            </>
             }
 
             {!user ?
@@ -90,7 +96,11 @@ const Navbar = ({user, logout}) => {
                 </AuthContainer>
             :
                 <AuthContainer>
-                    <LoginBtn onClick={logout} style={{background: "red"}}> <p style={{letterSpacing: "2px"}}> Sair </p></LoginBtn>
+                    {/* <UserInfo>
+                        <UserName>usuario: <small style={{color: "gray"}}> {user.username} </small></UserName>
+                        <UserName>email: <small style={{color: "gray"}}> {user.email} </small></UserName>
+                    </UserInfo> */}
+                    <LoginBtn onClick={logout}> <p style={{letterSpacing: "2px"}}> Sair </p></LoginBtn>
                 </AuthContainer>
             }
             
@@ -189,10 +199,12 @@ const Logo = styled.h1`
 const NavList = styled.ul`
     height: calc(100% - 53px);
     width: 100%;
-    background-color: #111;
+    /* background-color: #000; */
+    background: linear-gradient(to bottom, teal, #111);
+    /* background: linear-gradient(to top, #fff, #000); */
     margin: 0;
     padding: 0;
-    transform:  ${props => props.nav ? `translateY(0)` : `translateY(-100%)`} ;
+    transform:  ${props => props.nav ? `translateY(0)` : `translateY(-105%)`} ;
     z-index: -5;
     position: fixed;
     top: 53px;
@@ -235,7 +247,7 @@ const RegisterBtn = styled.div`
     font-size: 1.5rem;
     text-transform: capitalize;
     border-radius: 5px;
-    font-weight: 600;
+    font-weight: 500;
     margin-top: 15px;
 `;
 
@@ -248,7 +260,19 @@ const LoginBtn = styled.div`
     font-size: 1.5rem;
     text-transform: capitalize;
     border-radius: 5px;
-    font-weight: 600;
+    font-weight: 500;
+`;
+
+const UserInfo = styled.div`
+    
+    padding: 15px 15px;
+`;
+
+const UserName = styled.p`
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #ffffffc1;
+    margin-bottom: 5px;
 `;
 
 

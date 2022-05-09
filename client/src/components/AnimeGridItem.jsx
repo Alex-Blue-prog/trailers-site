@@ -52,6 +52,7 @@ const TotalCircle = styled.div`
         /* line-height: 22px; */
         height: 22px;
         width: 22px;
+        font-size: 0.8rem;
     }
 `;
 
@@ -72,6 +73,7 @@ const DubCircle = styled.div`
     @media (min-width: 700px) {
         line-height: 22px;
         padding: 0 8px;
+        font-size: 0.8rem;
     }
 `;
 

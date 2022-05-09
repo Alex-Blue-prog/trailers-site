@@ -1,5 +1,5 @@
 import Navbar from './components/Navbar';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
 import Home from './pages/Home';
 import EpsList from './pages/EpsList';
 import Ep from './pages/Ep';
@@ -81,16 +81,16 @@ function App() {
   
       <Router>
         <Navbar user={user} logout={logout}/>
-        <NavbarDesktop />
+        <NavbarDesktop user={user} logout={logout} />
         <Routes>
           <Route path='/' element={<Home checkFetching={checkFetching} isFetching={isFetching}/>} />
           <Route path='/eps/:id' element={<EpsList user={user} changeFavorite={changeFavorite} checkFetching={checkFetching} isFetching={isFetching} />} />
           <Route path='/ep/:id' element={<Ep checkFetching={checkFetching} isFetching={isFetching} />} />
           <Route path='/newanimes' element={<NewAnimes checkFetching={checkFetching} isFetching={isFetching} />} />
           <Route path='/popularanimes' element={<PopularAnimes checkFetching={checkFetching} isFetching={isFetching} />} />
-          <Route path='/login' element={<Login loginUser={loginUser} />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/favorites' element={<Favorites checkFetching={checkFetching} isFetching={isFetching} />} />
+          <Route path='/login' element={!user ? <Login loginUser={loginUser} /> : <Navigate to='/' />} />
+          <Route path='/register' element={!user ? <Register /> : <Navigate to='/' />} />
+          <Route path='/favorites' element={user ? <Favorites user={user} checkFetching={checkFetching} isFetching={isFetching} /> : <Navigate to='/' />} />
         </Routes>
 
       </Router>

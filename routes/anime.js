@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Anime = require("../models/Anime");
+const User = require("../models/User");
 const {verifyTokenAndAdmin} = require("./verifyToken");
 const multer = require('multer');
 const multerConfig = require('../config/multer');

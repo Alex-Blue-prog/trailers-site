@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import {Menu, Search, Close, Home, FiberNew, Star, MovieCreation} from '@material-ui/icons'
+import {Menu, Search, Close, Home, FiberNew, Star, MovieCreation, Favorite} from '@material-ui/icons'
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { axiosInstance } from "../config";
 
-const NavbarDesktop = () => {
+const NavbarDesktop = ({user, logout}) => {
     const [navOpen, setNavOpen] = useState(false);
     const [searchOpen, setSearchOpen] = useState(false);
     const [animes, setAnimes] = useState([]);
@@ -28,6 +28,7 @@ const NavbarDesktop = () => {
             document.body.style.overflow = "visible";
         }
     },[searchOpen]);
+
 
     const searchAnime = async (e) => {   
         
@@ -95,9 +96,31 @@ const NavbarDesktop = () => {
             <Link to="/popularanimes" style={{color: "inherit", textDecoration:"none"}} onClick={()=> setNavOpen(false)}>
             <NavListItem><NavIcon><Star style={{fontSize: "1.2rem"}}/></NavIcon>Populares</NavListItem>
             </Link>
-            {/* <Link to="/" style={{color: "inherit", textDecoration:"none"}} onClick={()=> setNavOpen(false)}>
-            <NavListItem><NavIcon><MovieCreation style={{fontSize: "1.5rem"}}/></NavIcon>Todos</NavListItem>
-            </Link> */}
+            {user && <>
+            <Link to="/favorites" style={{color: "inherit", textDecoration:"none"}} onClick={()=> setNavOpen(false)}>
+            <NavListItem><NavIcon><Favorite style={{fontSize: "1.5rem"}}/></NavIcon>Favoritos</NavListItem>
+            </Link>
+            <UserInfo>
+                <UserName>usuário: <small style={{textDecoration: "underline", marginLeft: "5px"}}> {user.username} </small></UserName>
+                <UserName>email: <small style={{textDecoration: "underline", marginLeft: "5px"}}> {user.email} </small></UserName>
+            </UserInfo>
+            </>
+            }
+
+            {!user ?
+                <AuthContainer>
+                    <Link to="/login" style={{color: "inherit", textDecoration:"none"}} onClick={()=> setNavOpen(false)}>
+                    <LoginBtn> <p> login  </p></LoginBtn>
+                    </Link>
+                    <Link to="/register" style={{color: "inherit", textDecoration:"none"}} onClick={()=> setNavOpen(false)}>
+                    <RegisterBtn><p> registrar </p></RegisterBtn>
+                    </Link>
+                </AuthContainer>
+            :
+                <AuthContainer>
+                    <LoginBtn onClick={logout}> <p style={{letterSpacing: "2px"}}> Sair </p></LoginBtn>
+                </AuthContainer>
+            }
         </NavList>
         <SearchList search={searchOpen}>
             {
@@ -196,7 +219,9 @@ const Logo = styled.h1`
 const NavList = styled.ul`
     height: calc(100vh - 53px);
     width: 300px;
-    background-color: #111;
+    /* background-color: #000; */
+    /* background: linear-gradient(to top, #fff, #000); */
+    background: linear-gradient(to bottom, teal, #111);
     margin: 0;
     padding: 0;
     transform:  ${props => props.nav ? `translateX(0)` : `translateX(-100%)`} ;
@@ -223,6 +248,56 @@ const NavIcon = styled.div`
     margin: 0 15px;
     
 `;
+
+
+const AuthContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 0 15px;
+    width: calc(100% - 30px);
+    position: absolute;
+    left: 0;
+    bottom: 15px;
+`;
+const RegisterBtn = styled.div`
+    color: teal;
+    background-color: #fff;
+    cursor: pointer;
+    text-align: center;
+    padding: 5px 0;
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    border-radius: 5px;
+    font-weight: 500;
+    margin-top: 15px;
+`;
+
+const LoginBtn = styled.div`
+    color: #fff;
+    background-color: teal;
+    cursor: pointer;
+    text-align: center;
+    padding: 5px 0;
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    border-radius: 5px;
+    font-weight: 500;
+    
+`;
+
+const UserInfo = styled.div`
+    
+    padding: 15px 15px;
+`;
+
+const UserName = styled.p`
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #ffffffc1;
+    margin-bottom: 5px;
+`;
+
+
 
 // search style
 const SearchList = styled.div`

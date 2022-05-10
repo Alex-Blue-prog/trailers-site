@@ -6,7 +6,7 @@ const verifyToken = (req,res,next) => {
     if(authHeader){
         const token = authHeader.split(" ")[1];
 
-        jwt.verify(token, process.env.JWT_SEC, (err,user)=> {
+        jwt.verify(JSON.parse(token), process.env.JWT_SEC, (err,user)=> {
             if(err) res.status(403).json("Token is not valid");
 
             req.user = user;
@@ -27,14 +27,4 @@ const verifyTokenAndAdmin = (req,res,next) => {
     })
 }
 
-const verifyTokenAndAdminTopLevel = (req,res,next) => {
-    verifyToken(req,res, ()=> {
-        if(req.user.isAdmin && req.user.topAdmin){
-            next();
-        } else{
-            return res.status(403).json("you are not the top admin");
-        }
-    })
-}
-
-module.exports = {verifyToken, verifyTokenAndAdmin, verifyTokenAndAdminTopLevel};
+module.exports = {verifyToken, verifyTokenAndAdmin};

@@ -160,15 +160,15 @@ router.put("/:id", verifyTokenAndAdmin, multer(multerConfig).single('file'), asy
             res.status(200).json(updateAnime);
         } else {
             
-            // if(req.user.topAdmin) {
-                //update anime main info
-                const updateAnime = await Anime.updateOne(
-                    {_id: req.params.id}, 
-                    {$set : req.body }
-                );
+            if(!req.user.topAdmin) return res.status(403).json("sorry baby !");
 
-                
-            // }
+            //update anime main info
+            const updateAnime = await Anime.updateOne(
+                {_id: req.params.id}, 
+                {$set : req.body }
+            );
+
+   
 
             res.status(200).json(updateAnime);
             
@@ -186,9 +186,10 @@ router.put("/:id", verifyTokenAndAdmin, multer(multerConfig).single('file'), asy
 //OBS: THE EP ID CHANGES WHEN GETS UPDATED. I DO NOT KNOW ANY MORE
 router.put("/ep/:epId", verifyTokenAndAdmin, multer(multerConfig).single('file'), async(req,res) => {
 
+    if(!req.user.topAdmin) return res.status(403).json("sorry baby !");
+
     let anime = JSON.parse(req.body.documents);
 
-    
 
     try{
         const getAnime = await Anime.findOne({episodes:{$elemMatch:{_id: req.params.epId}}});
@@ -233,6 +234,9 @@ router.put("/ep/:epId", verifyTokenAndAdmin, multer(multerConfig).single('file')
 
 //DELETE ANIME EP
 router.delete("/ep/:epId", verifyTokenAndAdmin, async(req,res) => {
+    
+    if(!req.user.topAdmin) return res.status(403).json("sorry baby !");
+
     const s3 = new aws.S3({
         accessKeyId: process.env.AWS_ACCESS_KEY_ID,
         secretAccessKey: process.env.AWS_SECRECT_ACCESS_KEY,

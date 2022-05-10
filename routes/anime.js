@@ -94,6 +94,8 @@ router.get("/:id", async (req,res) => {
 //DELETE ANIME COMPLETELY
 router.delete("/:id", verifyTokenAndAdmin, async (req,res) => {
     try{
+        if(!req.user.topAdmin) return res.status(403).json("sorry baby !");
+
         const getOneAnime = await Anime.findOneAndDelete({_id: req.params.id});
 
 

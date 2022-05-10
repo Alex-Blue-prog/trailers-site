@@ -157,14 +157,18 @@ router.put("/:id", verifyTokenAndAdmin, multer(multerConfig).single('file'), asy
             res.status(200).json(updateAnime);
         } else {
             
-            verifyTokenAndAdminTopLevel();
-            //update anime main info
-            const updateAnime = await Anime.updateOne(
-                {_id: req.params.id}, 
-                {$set : req.body }
-            );
+            if(req.user.topAdmin) {
+                //update anime main info
+                const updateAnime = await Anime.updateOne(
+                    {_id: req.params.id}, 
+                    {$set : req.body }
+                );
 
-            res.status(200).json(updateAnime);
+                res.status(200).json(updateAnime);
+            }
+
+            res.status(200).json("not allowed");
+            
         }
 
         

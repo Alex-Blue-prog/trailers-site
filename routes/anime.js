@@ -32,7 +32,7 @@ router.post("/search", async (req,res) => {
 
 
 //CREATE ANIME MAIN INFO
-router.post("/create", verifyToken, async (req,res) => {
+router.post("/create", verifyTokenAndAdmin, async (req,res) => {
 
     console.log("running...");
 

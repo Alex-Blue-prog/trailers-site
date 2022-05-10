@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const Anime = require("../models/Anime");
 const User = require("../models/User");
-const {verifyTokenAndAdmin, verifyTokenAndAdminTopLevel} = require("./verifyToken");
+const {verifyTokenAndAdmin, verifyTokenAndAdminTopLevel, verifyToken} = require("./verifyToken");
 const multer = require('multer');
 const multerConfig = require('../config/multer');
 const aws = require('aws-sdk');
@@ -32,7 +32,7 @@ router.post("/search", async (req,res) => {
 
 
 //CREATE ANIME MAIN INFO
-router.post("/create", verifyTokenAndAdmin, async (req,res) => {
+router.post("/create", verifyToken, async (req,res) => {
 
     console.log("running...");
 
